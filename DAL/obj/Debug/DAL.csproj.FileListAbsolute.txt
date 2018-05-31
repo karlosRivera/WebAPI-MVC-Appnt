@@ -1,0 +1,16 @@
+c:\users\tridip\documents\visual studio 2013\Projects\WebAPICRUD\DAL\bin\Debug\DAL.dll
+c:\users\tridip\documents\visual studio 2013\Projects\WebAPICRUD\DAL\bin\Debug\DAL.pdb
+c:\users\tridip\documents\visual studio 2013\Projects\WebAPICRUD\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+c:\users\tridip\documents\visual studio 2013\Projects\WebAPICRUD\DAL\obj\Debug\DAL.dll
+c:\users\tridip\documents\visual studio 2013\Projects\WebAPICRUD\DAL\obj\Debug\DAL.pdb
+C:\Users\Tridip\documents\visual studio 2013\Projects\WebAPICRUD\DAL\bin\Debug\DAL.dll.config
+C:\Users\Tridip\documents\visual studio 2013\Projects\WebAPICRUD\DAL\bin\Debug\Entities.dll
+C:\Users\Tridip\documents\visual studio 2013\Projects\WebAPICRUD\DAL\bin\Debug\Entities.pdb
+C:\Users\TRIDIP\Documents\Visual Studio 2013\Projects\Appointments\DAL\bin\Debug\DAL.dll.config
+C:\Users\TRIDIP\Documents\Visual Studio 2013\Projects\Appointments\DAL\bin\Debug\DAL.dll
+C:\Users\TRIDIP\Documents\Visual Studio 2013\Projects\Appointments\DAL\bin\Debug\DAL.pdb
+C:\Users\TRIDIP\Documents\Visual Studio 2013\Projects\Appointments\DAL\bin\Debug\Entities.dll
+C:\Users\TRIDIP\Documents\Visual Studio 2013\Projects\Appointments\DAL\bin\Debug\Entities.pdb
+C:\Users\TRIDIP\Documents\Visual Studio 2013\Projects\Appointments\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\TRIDIP\Documents\Visual Studio 2013\Projects\Appointments\DAL\obj\Debug\DAL.dll
+C:\Users\TRIDIP\Documents\Visual Studio 2013\Projects\Appointments\DAL\obj\Debug\DAL.pdb

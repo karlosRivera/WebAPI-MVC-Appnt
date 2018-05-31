@@ -1,0 +1,121 @@
+﻿@model  Appointments.Models.DoctorViewModel
+
+@using System.Configuration;
+
+@{
+    ViewBag.Title = "Add Your Appointments";
+}
+
+<div class="container-fluid">
+    <h2>Add Your Appointments</h2><br />
+    <p>
+        @Html.DropDownListFor(e => e.DocID, new SelectList(Model.Doctors, "Value", "Text"), "--Select--", new {@id="ddldoc" })
+
+        <a href="@Url.Action("List")" class="btn btn-success pull-right" role="button">Back to Appointments</a>
+    </p>
+    <br /><br />
+    <p>
+        <table id="tblAppointments" class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Doctor Name</th>
+                    <th scope="col">Available Date</th>
+                    <th scope="col">Available Time</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+        </table>
+    </p>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var status='';
+            var useremail = encodeURIComponent('@User.Identity.Name');
+            $("#tblAppointments").find("tr:gt(0)").remove();
+            $("select#ddldoc").val('');
+
+            $("#ddldoc").change(function () {
+                if (this.value != '') {
+                    var baseurl = '@ConfigurationManager.AppSettings["baseAddress"]' + 'api/Appointments/DocAppointmentDetails/' + this.value + '/';
+
+                    //alert(useremail + '  ' + this.value);
+                    $("#tblAppointments").find("tr:gt(0)").remove();
+
+                    $.ajax({
+                        url: baseurl,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data, textStatus, xhr) {
+                            //console.log(data);
+
+                            $.each(data, function (i, item) {
+                                var hiddendocid = '<input type="hidden" id="hdndocid" value="' + item.RowID + '" />';
+                                var hiddenpatientemail = '<input type="hidden" id="hdnpatientemail" value="' + useremail + '" />';
+
+                                if (item.Email == decodeURIComponent(useremail))
+                                {
+                                    status='Booked';
+                                }
+                                else
+                                {
+                                    status = '<button id="btnbook"  type="button" class="btn btn-info btnbook">Book Now</button>';
+                                }
+
+                                $("#tblAppointments")
+                                .append("<tr><td>" + hiddendocid + hiddenpatientemail
+                                + item.DoctorName + "</td>" +
+                                "<td>"+item.AvailableDate +  "</td>"+
+                                "<td>"+item.AvailableTime +  "</td>"+
+                                "<td>" + status + "</td></tr>");
+                            });
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            alert(err.Message);
+                            console.log(textStatus);
+                        }
+
+                    }).done(function () {
+
+
+                    });
+
+
+                }
+            });
+
+            $('#tblAppointments').on('click', '.btnbook', function () {
+                var rowid = $(this).closest('tr').find("input[id*='hdndocid']").val();
+                var email = $(this).closest('tr').find("input[id*='hdnpatientemail']").val();
+                var self = $(this);
+
+                var baseurl = '@ConfigurationManager.AppSettings["baseAddress"]' + 'api/Appointments/BookAppointment';
+                //alert(baseurl);
+                $.ajax({
+                    url: baseurl,
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json",
+                    data: JSON.stringify({ email: email, rowid: rowid }),
+                    success: function (data, textStatus, xhr) {
+                        if(data=='SUCCESS');
+                        {
+                            self.closest('td').html('Booked');
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert('Error ' + err.Message);
+                        console.log(textStatus);
+                    }
+
+                }).done(function () {
+
+                });
+            });
+
+        }); 
+    </script>
+}

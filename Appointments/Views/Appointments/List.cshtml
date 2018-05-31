@@ -1,0 +1,48 @@
+﻿@model  IEnumerable<Entities.UserAppointments>
+
+    @{
+        ViewBag.Title = "List";
+    }
+
+    <div class="container-fluid">
+        <h2>List of appointments booked by @User.Identity.Name </h2>
+
+        <p>
+        @using (Html.BeginForm("AddAppointments", "Appointments", FormMethod.Post))
+        {
+            <input type="submit" class="btn btn-primary pull-right" value="Add Appointments">
+        }
+        </p>
+
+        <p>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Doctor Name</th>
+                        <th scope="col">Booked Date</th>
+                        <th scope="col">Booked Time</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model!=null)
+                    { 
+                        foreach(var item in Model)
+                        { 
+                            <tr>
+                                <td>@item.DoctorName</td>
+                                <td>@item.AvailableDate</td>
+                                <td>@item.AvailableTime</td>
+                                <td>Booked</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="3" align="center" valign="middle"><h3>No appointments found for user @User.Identity.Name</h3></td></tr>
+                    }
+                </tbody>
+            </table>
+
+        </p>
+    </div>
